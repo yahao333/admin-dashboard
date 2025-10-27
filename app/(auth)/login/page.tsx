@@ -49,10 +49,10 @@ export default function LoginPage() {
           <CardDescription className="text-zinc-500">给您稳定优质的服务体验</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={onSubmit} className="grid gap-4">
+          <form onSubmit={onSubmit} className="space-y-6">
             <div className="grid gap-1">
               <label htmlFor="email" className="sr-only">邮箱</label>
-              <div className="relative">
+              <div className="relative w-full md:w-[25vw] mx-auto">
                 <input
                   id="email"
                   type="email"
@@ -60,7 +60,7 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="邮箱"
-                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-3 py-3 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                   {/* email icon */}
@@ -73,7 +73,7 @@ export default function LoginPage() {
             </div>
             <div className="grid gap-1">
               <label htmlFor="password" className="sr-only">密码</label>
-              <div className="relative">
+              <div className="relative w-full md:w-[25vw] mx-auto">
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
@@ -81,7 +81,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="密码"
-                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-10 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-10 py-3 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                   {/* lock icon */}
@@ -114,14 +114,14 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={!canSubmit}
-              className={`mt-2 h-10 w-full ${!canSubmit ? "bg-zinc-300 text-zinc-500 hover:bg-zinc-300 cursor-not-allowed" : ""}`}
+              className={`h-12 w-full md:w-[25vw] mx-auto ${!canSubmit ? "bg-zinc-300 text-zinc-500 hover:bg-zinc-300 cursor-not-allowed" : ""}`}
             >
               登录
             </Button>
           </form>
           {/* 移除本地假令牌按钮，统一走真实后端登录 */}
         </CardContent>
-        <CardFooter className="flex flex-col gap-2">
+        <CardFooter className="flex flex-col gap-2 mt-6">
           {error && <p className="text-sm text-red-500">{error}</p>}
           {ok && <p className="text-sm text-green-500">登录成功</p>}
           <div className="w-full">
