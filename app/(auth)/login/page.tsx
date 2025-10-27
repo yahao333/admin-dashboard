@@ -42,10 +42,10 @@ export default function LoginPage() {
 
   return (
     <section className="flex min-h-screen items-center justify-center py-10">
-      <Card className="w-full max-w-lg bg-[var(--vpn-card)] text-[var(--vpn-fg)] border-[var(--vpn-border)] shadow-xl rounded-xl">
+      <Card className="w-full max-w-lg shadow-xl rounded-xl">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold">逅猫</CardTitle>
-          <CardDescription className="text-[var(--vpn-muted)]">给您稳定优质的服务体验</CardDescription>
+          <CardDescription className="text-zinc-500">给您稳定优质的服务体验</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="grid gap-4">
@@ -59,7 +59,7 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="邮箱"
-                  className="w-full rounded-md border border-[var(--vpn-border)] bg-[var(--vpn-card)] pl-10 pr-3 py-2 text-[var(--vpn-fg)] placeholder:text-[var(--vpn-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--vpn-primary)]"
+                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                   {/* email icon */}
@@ -80,7 +80,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="密码"
-                  className="w-full rounded-md border border-[var(--vpn-border)] bg-[var(--vpn-card)] pl-10 pr-10 py-2 text-[var(--vpn-fg)] placeholder:text-[var(--vpn-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--vpn-primary)]"
+                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-10 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                   {/* lock icon */}
@@ -92,7 +92,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   aria-label={showPassword ? "隐藏密码" : "显示密码"}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--vpn-muted)] hover:text-[var(--vpn-fg)]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700"
                   onClick={() => setShowPassword((v) => !v)}
                 >
                   {/* eye icon */}
@@ -117,10 +117,10 @@ export default function LoginPage() {
         <CardFooter className="flex flex-col gap-2">
           {error && <p className="text-sm text-red-500">{error}</p>}
           {ok && <p className="text-sm text-green-500">登录成功</p>}
-          <div className="text-xs text-[var(--vpn-muted)]">
-            <a className="text-[var(--vpn-primary)] hover:underline" href="/register">注册</a>
+          <div className="text-xs text-zinc-500">
+            <a className="text-blue-600 hover:underline" href="/register">注册</a>
             <span className="mx-2">|</span>
-            <a className="text-[var(--vpn-primary)] hover:underline" href="#">忘记密码</a>
+            <a className="text-blue-600 hover:underline" href="#">忘记密码</a>
           </div>
         </CardFooter>
       </Card>
