@@ -17,7 +17,8 @@ async function jsonFetch(path: string, init?: RequestInit) {
     const text = await res.text();
     if (res.status === 401) {
       clearToken();
-      if (typeof window !== "undefined") {
+      const isTestEnv = process.env.NODE_ENV === 'test' || !!process.env.JEST_WORKER_ID;
+      if (typeof window !== "undefined" && !isTestEnv) {
         const next = encodeURIComponent(window.location.pathname);
         window.location.href = `/login?next=${next}`;
       }

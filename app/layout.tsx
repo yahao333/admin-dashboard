@@ -10,7 +10,7 @@ import GlobalNotifications from "@/components/GlobalNotifications";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN">
-      <body className="theme-vpn">
+      <body>
         <GlobalProvider>
           {children}
           <GlobalNotifications />
