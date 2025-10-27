@@ -21,6 +21,7 @@ export default function HeaderNav() {
     <nav className="nav-actions">
       {authed ? (
         <>
+          <a className="text-[var(--vpn-fg)] hover:text-[var(--vpn-primary)]" href="/profile">个人中心</a>
           <a className="text-[var(--vpn-fg)] hover:text-[var(--vpn-primary)]" href="/dashboard">Dashboard</a>
           <Button variant="secondary" onClick={onLogout}>登出</Button>
         </>

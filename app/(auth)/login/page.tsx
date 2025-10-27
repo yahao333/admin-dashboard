@@ -29,15 +29,26 @@ function LoginForm() {
         saveToken(res.token);
         setOk(true);
         notify.success("登录成功");
-        const next = searchParams.get("next") || "/dashboard";
-        router.replace(next);
+        if (res?.must_change_password) {
+          router.replace(`/change-password?email=${encodeURIComponent(email)}`);
+        } else {
+          const next = searchParams.get("next") || "/dashboard";
+          router.replace(next);
+        }
       } else {
         setError("登录失败，未返回令牌");
         notify.error("登录失败，未返回令牌");
       }
     } catch (err: any) {
-      setError(err?.message ?? "登录失败");
-      notify.error(err?.message ?? "登录失败");
+      const raw = err?.message ?? "登录失败";
+      let msg = raw;
+      if (raw === "invalid_credentials") {
+        msg = "邮箱或密码错误";
+      } else if (raw.startsWith("HTTP 401")) {
+        msg = "未授权，请重新登录";
+      }
+      setError(msg);
+      notify.error(msg);
     }
   }
 

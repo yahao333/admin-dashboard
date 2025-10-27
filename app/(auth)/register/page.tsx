@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState, Suspense } from "react";
+import { FormEvent, useMemo, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { register } from "@/lib/api";
 import { saveToken } from "@/lib/auth";
@@ -14,13 +14,44 @@ function RegisterForm() {
   const notify = useNotifications();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [ok, setOk] = useState(false);
+
+  // 密码强度：至少8位，包含字母和数字
+  const isStrongPassword = useMemo(() => {
+    const pwd = password;
+    if (!pwd) return false;
+    const hasMinLen = pwd.length >= 8;
+    const hasLetter = /[A-Za-z]/.test(pwd);
+    const hasNumber = /\d/.test(pwd);
+    return hasMinLen && hasLetter && hasNumber;
+  }, [password]);
+
+  const strengthLabel = useMemo(() => {
+    if (!password) return "";
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+    if (score <= 1) return "弱";
+    if (score === 2) return "中";
+    return "强";
+  }, [password]);
+
+  const canSubmit = email.trim().length > 0 && isStrongPassword;
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
     setOk(false);
+    if (!isStrongPassword) {
+      const msg = "密码过弱：至少8位，需包含字母和数字";
+      setError(msg);
+      notify.error(msg);
+      return;
+    }
     try {
       const res = await register({ email, password });
       if (res?.token) {
@@ -73,7 +104,7 @@ function RegisterForm() {
               <div className="relative">
                 <input
                   id="reg-password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -86,9 +117,34 @@ function RegisterForm() {
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
                 </span>
+                <button
+                  type="button"
+                  aria-label={showPassword ? "隐藏密码" : "显示密码"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700"
+                  onClick={() => setShowPassword((v) => !v)}
+                >
+                  {showPassword ? (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C7 20 2.73 16.11 1 12c.77-1.79 2-3.35 3.5-4.64M9.9 4.24A10.93 10.93 0 0 1 12 4c5 0 9.27 3.89 11 8-1.02 2.37-2.64 4.39-4.62 5.76M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                      <path d="M1 1l22 22" />
+                    </svg>
+                  ) : (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  )}
+                </button>
               </div>
+              <p className="text-xs text-zinc-500 mt-1">至少8位，需包含字母和数字。建议加入大小写与符号提升强度。</p>
+              {password && (
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-xs text-zinc-600">密码强度：</span>
+                  <span className={`text-xs font-medium ${strengthLabel === "弱" ? "text-red-600" : strengthLabel === "中" ? "text-yellow-600" : "text-green-600"}`}>{strengthLabel}</span>
+                </div>
+              )}
             </div>
-            <Button type="submit" className="mt-2 h-10">注册</Button>
+            <Button type="submit" disabled={!canSubmit} className={`mt-2 h-10 ${!canSubmit ? "bg-zinc-300 text-zinc-500 hover:bg-zinc-300 cursor-not-allowed" : ""}`}>注册</Button>
           </form>
         </CardContent>
         <CardFooter className="flex flex-col gap-2">

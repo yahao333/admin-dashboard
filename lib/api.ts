@@ -46,6 +46,13 @@ export async function register(payload: { email: string; password: string }) {
   });
 }
 
+export async function changePassword(payload: { email: string; old_password: string; new_password: string }) {
+  return jsonFetch("/auth/change-password", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
 export async function getMe() {
   return jsonFetch("/me");
 }
