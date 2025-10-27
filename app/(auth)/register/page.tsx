@@ -1,12 +1,15 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { register } from "@/lib/api";
+import { saveToken } from "@/lib/auth";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function RegisterPage() {
-  const [username, setUsername] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -17,9 +20,12 @@ export default function RegisterPage() {
     setError(null);
     setOk(false);
     try {
-      const res = await register({ username, email, password });
+      const res = await register({ email, password });
       if (res?.token) {
+        saveToken(res.token);
         setOk(true);
+        const next = searchParams.get("next") || "/dashboard";
+        router.replace(next);
       } else {
         setError("注册失败，未返回令牌");
       }
@@ -37,27 +43,7 @@ export default function RegisterPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="grid gap-4">
-            <div className="grid gap-1">
-              <label htmlFor="reg-username" className="sr-only">用户名</label>
-              <div className="relative">
-                <input
-                  id="reg-username"
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  placeholder="用户名"
-                  className="w-full rounded-md border border-gray-300 bg-white pl-10 pr-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M4 21v-2a4 4 0 0 1 3-3.87" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                </span>
-              </div>
-            </div>
+            
             <div className="grid gap-1">
               <label htmlFor="reg-email" className="sr-only">邮箱</label>
               <div className="relative">
