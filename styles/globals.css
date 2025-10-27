@@ -1,9 +1,9 @@
 :root {
-  --bg: #0b0c10;
-  --fg: #e5e7eb;
-  --muted: #9ca3af;
+  --bg: #ffffff;
+  --fg: #111827;
+  --muted: #6b7280;
   --primary: #3b82f6;
-  --card: #111827;
+  --card: #f9fafb;
 }
 
 @tailwind base;
