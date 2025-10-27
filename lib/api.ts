@@ -38,7 +38,7 @@ export async function login(payload: { email: string; password: string }) {
   });
 }
 
-export async function register(payload: { email: string; password: string }) {
+export async function register(payload: { username: string; email: string; password: string }) {
   return jsonFetch("/auth/register", {
     method: "POST",
     body: JSON.stringify(payload),

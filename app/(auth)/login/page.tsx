@@ -1,12 +1,15 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { login } from "@/lib/api";
 import { saveToken } from "@/lib/auth";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +25,8 @@ export default function LoginPage() {
       if (res?.token) {
         saveToken(res.token);
         setOk(true);
+        const next = searchParams.get("next") || "/dashboard";
+        router.replace(next);
       } else {
         setError("登录失败，未返回令牌");
       }
@@ -109,6 +114,8 @@ export default function LoginPage() {
                 onClick={() => {
                   saveToken("dev-token");
                   setOk(true);
+                  const next = searchParams.get("next") || "/dashboard";
+                  router.replace(next);
                 }}
               >
                 本地调试：使用假令牌登录
@@ -120,7 +127,7 @@ export default function LoginPage() {
           {error && <p className="text-sm text-red-600">{error}</p>}
           {ok && <p className="text-sm text-green-600">登录成功</p>}
           <div className="text-xs text-gray-500">
-            <a className="text-blue-600 hover:underline" href="#">注册</a>
+            <a className="text-blue-600 hover:underline" href="/register">注册</a>
             <span className="mx-2">|</span>
             <a className="text-blue-600 hover:underline" href="#">忘记密码</a>
           </div>
