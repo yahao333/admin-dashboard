@@ -6,10 +6,12 @@ import { login } from "@/lib/api";
 import { saveToken } from "@/lib/auth";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNotifications } from "@/hooks/useGlobal";
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const notify = useNotifications();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -25,13 +27,16 @@ export default function LoginPage() {
       if (res?.token) {
         saveToken(res.token);
         setOk(true);
+        notify.success("登录成功");
         const next = searchParams.get("next") || "/dashboard";
         router.replace(next);
       } else {
         setError("登录失败，未返回令牌");
+        notify.error("登录失败，未返回令牌");
       }
     } catch (err: any) {
       setError(err?.message ?? "登录失败");
+      notify.error(err?.message ?? "登录失败");
     }
   }
 

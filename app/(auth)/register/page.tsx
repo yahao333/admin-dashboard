@@ -6,10 +6,12 @@ import { register } from "@/lib/api";
 import { saveToken } from "@/lib/auth";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNotifications } from "@/hooks/useGlobal";
 
 export default function RegisterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const notify = useNotifications();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -24,13 +26,16 @@ export default function RegisterPage() {
       if (res?.token) {
         saveToken(res.token);
         setOk(true);
+        notify.success("注册成功");
         const next = searchParams.get("next") || "/dashboard";
         router.replace(next);
       } else {
         setError("注册失败，未返回令牌");
+        notify.error("注册失败，未返回令牌");
       }
     } catch (err: any) {
       setError(err?.message ?? "注册失败");
+      notify.error(err?.message ?? "注册失败");
     }
   }
 
