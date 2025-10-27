@@ -44,7 +44,7 @@ export default function LoginPage() {
     <section className="flex min-h-screen items-center justify-center py-10">
       <Card className="w-full max-w-lg shadow-xl rounded-xl">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold">逅猫</CardTitle>
+          <CardTitle className="text-3xl font-bold">管理后台</CardTitle>
           <CardDescription className="text-zinc-500">给您稳定优质的服务体验</CardDescription>
         </CardHeader>
         <CardContent>
