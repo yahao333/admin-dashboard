@@ -36,14 +36,13 @@ export default function RegisterPage() {
 
   return (
     <section className="flex min-h-screen items-center justify-center py-10">
-      <Card className="w-full max-w-lg bg-white text-gray-900 border-gray-200 shadow-xl rounded-xl">
+      <Card className="w-full max-w-lg bg-[var(--vpn-card)] text-[var(--vpn-fg)] border-[var(--vpn-border)] shadow-xl rounded-xl">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold">逅猫</CardTitle>
-          <CardDescription className="text-gray-500">创建账号，开启稳定优质的体验</CardDescription>
+          <CardDescription className="text-[var(--vpn-muted)]">欢迎加入，体验稳定优质的服务</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="grid gap-4">
-            
             <div className="grid gap-1">
               <label htmlFor="reg-email" className="sr-only">邮箱</label>
               <div className="relative">
@@ -54,9 +53,9 @@ export default function RegisterPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="邮箱"
-                  className="w-full rounded-md border border-gray-300 bg-white pl-10 pr-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-md border border-[var(--vpn-border)] bg-[var(--vpn-card)] pl-10 pr-3 py-2 text-[var(--vpn-fg)] placeholder:text-[var(--vpn-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--vpn-primary)]"
                 />
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--vpn-muted)]">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2z" />
                     <path d="m22 6-10 7L2 6" />
@@ -74,9 +73,9 @@ export default function RegisterPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="密码"
-                  className="w-full rounded-md border border-gray-300 bg-white pl-10 pr-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-md border border-[var(--vpn-border)] bg-[var(--vpn-card)] pl-10 pr-3 py-2 text-[var(--vpn-fg)] placeholder:text-[var(--vpn-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--vpn-primary)]"
                 />
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--vpn-muted)]">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -88,10 +87,10 @@ export default function RegisterPage() {
           </form>
         </CardContent>
         <CardFooter className="flex flex-col gap-2">
-          {error && <p className="text-sm text-red-600">{error}</p>}
-          {ok && <p className="text-sm text-green-600">注册成功</p>}
-          <div className="text-xs text-gray-500">
-            <a className="text-blue-600 hover:underline" href="/login">已有账号？前往登录</a>
+          {error && <p className="text-sm text-red-500">{error}</p>}
+          {ok && <p className="text-sm text-green-500">注册成功</p>}
+          <div className="text-xs text-[var(--vpn-muted)]">
+            <a className="text-[var(--vpn-primary)] hover:underline" href="/login">已有账号？前往登录</a>
           </div>
         </CardFooter>
       </Card>

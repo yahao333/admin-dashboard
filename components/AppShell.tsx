@@ -4,11 +4,11 @@ import HeaderNav from "@/components/HeaderNav";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#0b1220] text-gray-100">
-      <header className="sticky top-0 z-10 border-b border-gray-800 bg-[#0b1220]/90 backdrop-blur">
+    <div className="min-h-screen bg-[var(--vpn-bg)] text-[var(--vpn-fg)]">
+      <header className="sticky top-0 z-10 border-b border-[var(--vpn-border)] bg-[var(--vpn-header)] backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-blue-600 text-white">猫</span>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[var(--vpn-primary)] text-white">猫</span>
             <h1 className="text-lg font-semibold">逗猫 · 控制台</h1>
           </div>
           <HeaderNav />
@@ -16,7 +16,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <div className="mx-auto grid max-w-6xl grid-cols-[240px_1fr] gap-6 px-4 py-6">
-        <aside className="rounded-lg border border-gray-700 bg-[#0b1220] p-3 text-sm text-gray-200">
+        <aside className="rounded-lg border border-[var(--vpn-border)] bg-[var(--vpn-card)] p-3 text-sm">
           <nav className="space-y-2">
             {[
               { label: "仪表盘", href: "/dashboard" },
@@ -27,10 +27,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               { label: "我的评价", href: "#" },
               { label: "提取订单", href: "#" },
               { label: "个人中心", href: "#" },
-            ].map((item) => (
+              ].map((item) => (
               <a
                 key={item.label}
-                className="block rounded-md px-3 py-2 hover:bg-[#111827]"
+                className="block rounded-md px-3 py-2 hover:bg-[var(--vpn-muted-bg)]"
                 href={item.href}
               >
                 {item.label}
@@ -42,7 +42,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <main className="space-y-6">{children}</main>
       </div>
 
-      <footer className="mx-auto max-w-6xl px-4 py-6 text-xs text-gray-400">
+      <footer className="mx-auto max-w-6xl px-4 py-6 text-xs text-[var(--vpn-muted)]">
         <small>© {new Date().getFullYear()} yanghao0075</small>
       </footer>
     </div>

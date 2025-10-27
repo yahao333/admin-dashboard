@@ -21,13 +21,13 @@ export default function HeaderNav() {
     <nav className="nav-actions">
       {authed ? (
         <>
-          <a className="nav-link" href="/dashboard">Dashboard</a>
+          <a className="text-[var(--vpn-fg)] hover:text-[var(--vpn-primary)]" href="/dashboard">Dashboard</a>
           <Button variant="secondary" onClick={onLogout}>登出</Button>
         </>
       ) : (
         <>
-          <a className="nav-link" href="/login">登录</a>
-          <a className="nav-link" href="/register">注册</a>
+          <a className="text-[var(--vpn-fg)] hover:text-[var(--vpn-primary)]" href="/login">登录</a>
+          <a className="text-[var(--vpn-fg)] hover:text-[var(--vpn-primary)]" href="/register">注册</a>
         </>
       )}
     </nav>
