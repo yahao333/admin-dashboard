@@ -44,3 +44,11 @@ export async function register(payload: { email: string; password: string }) {
     body: JSON.stringify(payload),
   });
 }
+
+export async function getMe() {
+  return jsonFetch("/me");
+}
+
+export async function getDashboard() {
+  return jsonFetch("/dashboard");
+}
