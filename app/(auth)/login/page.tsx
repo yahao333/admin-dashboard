@@ -30,10 +30,23 @@ function LoginForm() {
         setOk(true);
         notify.success("登录成功");
         if (res?.must_change_password) {
-          router.replace(`/change-password?email=${encodeURIComponent(email)}`);
+          const target = `/change-password?email=${encodeURIComponent(email)}`;
+          router.replace(target);
+          // Fallback：若客户端路由未生效，强制刷新跳转
+          setTimeout(() => {
+            if (typeof window !== "undefined" && window.location.pathname === "/login") {
+              window.location.assign(target);
+            }
+          }, 50);
         } else {
           const next = searchParams.get("next") || "/dashboard";
           router.replace(next);
+          // Fallback：若客户端路由未生效，强制刷新跳转
+          setTimeout(() => {
+            if (typeof window !== "undefined" && window.location.pathname === "/login") {
+              window.location.assign(next);
+            }
+          }, 50);
         }
       } else {
         setError("登录失败，未返回令牌");
