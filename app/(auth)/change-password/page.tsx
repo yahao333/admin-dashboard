@@ -6,6 +6,8 @@ import { changePassword } from "@/lib/api";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNotifications } from "@/hooks/useGlobal";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 function ChangePasswordForm() {
   const router = useRouter();
@@ -82,26 +84,26 @@ function ChangePasswordForm() {
         <CardContent>
           <form onSubmit={onSubmit} className="grid gap-4">
             <div className="grid gap-1">
-              <label htmlFor="email" className="sr-only">邮箱</label>
-              <input
+              <Label htmlFor="email" className="sr-only">邮箱</Label>
+              <Input
                 id="email"
                 type="email"
                 value={email}
                 readOnly
-                className="w-full rounded-md border border-zinc-300 bg-zinc-100 pl-3 pr-3 py-2 text-zinc-900"
+                className="bg-zinc-100"
               />
             </div>
             <div className="grid gap-1">
-              <label htmlFor="old" className="sr-only">原密码</label>
+              <Label htmlFor="old" className="sr-only">原密码</Label>
               <div className="relative">
-                <input
+                <Input
                   id="old"
                   type={showOld ? "text" : "password"}
                   value={oldPassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                   required
                   placeholder="原密码"
-                  className="w-full rounded-md border border-zinc-300 bg-white pl-3 pr-10 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="pl-3 pr-10 py-2"
                 />
                 <button type="button" aria-label={showOld ? "隐藏" : "显示"} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700" onClick={() => setShowOld(v => !v)}>
                   {showOld ? "🙈" : "👁️"}
@@ -109,16 +111,16 @@ function ChangePasswordForm() {
               </div>
             </div>
             <div className="grid gap-1">
-              <label htmlFor="new" className="sr-only">新密码</label>
+              <Label htmlFor="new" className="sr-only">新密码</Label>
               <div className="relative">
-                <input
+                <Input
                   id="new"
                   type={showNew ? "text" : "password"}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                   placeholder="新密码（至少8位，需包含字母和数字）"
-                  className="w-full rounded-md border border-zinc-300 bg-white pl-3 pr-10 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="pl-3 pr-10 py-2"
                 />
                 <button type="button" aria-label={showNew ? "隐藏" : "显示"} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700" onClick={() => setShowNew(v => !v)}>
                   {showNew ? "🙈" : "👁️"}
@@ -127,15 +129,15 @@ function ChangePasswordForm() {
               <p className="text-xs text-zinc-500 mt-1">建议加入大小写与符号提升强度。</p>
             </div>
             <div className="grid gap-1">
-              <label htmlFor="confirm" className="sr-only">确认新密码</label>
-              <input
+              <Label htmlFor="confirm" className="sr-only">确认新密码</Label>
+              <Input
                 id="confirm"
                 type="password"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
                 required
                 placeholder="确认新密码"
-                className="w-full rounded-md border border-zinc-300 bg-white pl-3 pr-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="pl-3 pr-3 py-2"
               />
             </div>
             <Button type="submit" disabled={!canSubmit} className={`mt-2 h-10 ${!canSubmit ? "bg-zinc-300 text-zinc-500 hover:bg-zinc-300 cursor-not-allowed" : ""}`}>确认修改</Button>

@@ -1,8 +1,11 @@
 "use client";
 
 import HeaderNav from "@/components/HeaderNav";
+import { Card } from "@/components/ui/card";
+import { usePathname } from "next/navigation";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   return (
     <div className="min-h-screen bg-white text-zinc-900">
       <header className="sticky top-0 z-10 border-b border-zinc-200 bg-white/80 backdrop-blur">
@@ -14,22 +17,24 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-6xl grid-cols-[240px_1fr] gap-6 px-4 py-6">
-        <aside className="rounded-lg border border-zinc-200 bg-white p-3 text-sm">
-          <nav className="space-y-2">
-            {[
-              { label: "仪表盘", href: "/dashboard" },
-              { label: "个人中心", href: "/profile" },
+      <div className="mx-auto grid max-w-6xl grid-cols-[220px_1fr] gap-6 px-4 py-6">
+        <aside>
+          <Card className="rounded-lg border border-zinc-200 bg-white p-3 text-sm">
+            <nav className="space-y-1">
+              {[
+                { label: "仪表盘", href: "/dashboard" },
+                { label: "个人中心", href: "/profile" },
               ].map((item) => (
-              <a
-                key={item.label}
-                className="block rounded-md px-3 py-2 hover:bg-zinc-100"
-                href={item.href}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+                <a
+                  key={item.label}
+                  className={`block rounded-md px-3 py-2 hover:bg-zinc-100 ${pathname === item.href ? "font-semibold text-blue-600 bg-zinc-50" : "text-zinc-700"}`}
+                  href={item.href}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </Card>
         </aside>
 
         <main className="space-y-6">{children}</main>

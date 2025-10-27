@@ -7,6 +7,8 @@ import { saveToken } from "@/lib/auth";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNotifications } from "@/hooks/useGlobal";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 function RegisterForm() {
   const router = useRouter();
@@ -80,18 +82,18 @@ function RegisterForm() {
         <CardContent>
           <form onSubmit={onSubmit} className="grid gap-4">
             <div className="grid gap-1">
-              <label htmlFor="reg-email" className="sr-only">邮箱</label>
+              <Label htmlFor="reg-email" className="sr-only">邮箱</Label>
               <div className="relative">
-                <input
+                <Input
                   id="reg-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="邮箱"
-                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="pl-10 pr-3 py-2"
                 />
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--vpn-muted)]">
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2z" />
                     <path d="m22 6-10 7L2 6" />
@@ -100,16 +102,16 @@ function RegisterForm() {
               </div>
             </div>
             <div className="grid gap-1">
-              <label htmlFor="reg-password" className="sr-only">密码</label>
+              <Label htmlFor="reg-password" className="sr-only">密码</Label>
               <div className="relative">
-                <input
+                <Input
                   id="reg-password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="密码"
-                  className="w-full rounded-md border border-zinc-300 bg-white pl-10 pr-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="pl-10 pr-3 py-2"
                 />
                 <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
