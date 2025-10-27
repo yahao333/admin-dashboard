@@ -17,6 +17,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [ok, setOk] = useState(false);
+  const canSubmit = email.trim().length > 0 && password.trim().length > 0;
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -42,7 +43,7 @@ export default function LoginPage() {
 
   return (
     <section className="flex min-h-screen items-center justify-center py-10">
-      <Card className="w-full max-w-lg shadow-xl rounded-xl">
+      <Card className="w-full max-w-md shadow-xl rounded-xl">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold">管理后台</CardTitle>
           <CardDescription className="text-zinc-500">给您稳定优质的服务体验</CardDescription>
@@ -110,17 +111,25 @@ export default function LoginPage() {
                 </button>
               </div>
             </div>
-            <Button type="submit" className="mt-2 h-10">登录</Button>
+            <Button
+              type="submit"
+              disabled={!canSubmit}
+              className={`mt-2 h-10 w-full ${!canSubmit ? "bg-zinc-300 text-zinc-500 hover:bg-zinc-300 cursor-not-allowed" : ""}`}
+            >
+              登录
+            </Button>
           </form>
           {/* 移除本地假令牌按钮，统一走真实后端登录 */}
         </CardContent>
         <CardFooter className="flex flex-col gap-2">
           {error && <p className="text-sm text-red-500">{error}</p>}
           {ok && <p className="text-sm text-green-500">登录成功</p>}
-          <div className="text-xs text-zinc-500">
-            <a className="text-blue-600 hover:underline" href="/register">注册</a>
-            <span className="mx-2">|</span>
-            <a className="text-blue-600 hover:underline" href="#">忘记密码</a>
+          <div className="w-full">
+            <div className="flex h-10 w-full items-center justify-center rounded-md bg-blue-600 text-white">
+              <a className="px-2 hover:underline" href="/register">注册</a>
+              <span className="mx-2 opacity-90">|</span>
+              <a className="px-2 hover:underline" href="#">忘记密码</a>
+            </div>
           </div>
         </CardFooter>
       </Card>
