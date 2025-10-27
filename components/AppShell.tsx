@@ -19,13 +19,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           <nav className="space-y-2">
             {[
               { label: "仪表盘", href: "/dashboard" },
-              { label: "供电账单", href: "#" },
-              { label: "购买订阅", href: "#" },
-              { label: "订单状态", href: "#" },
-              { label: "我的订单", href: "#" },
-              { label: "我的评价", href: "#" },
-              { label: "提取订单", href: "#" },
-              { label: "个人中心", href: "#" },
+              { label: "个人中心", href: "/profile" },
               ].map((item) => (
               <a
                 key={item.label}
