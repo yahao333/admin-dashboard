@@ -48,44 +48,44 @@ export default function DashboardPage() {
 
           {/* 公告横幅 */}
           {data?.announce && (
-            <div className="overflow-hidden rounded-lg border border-[var(--vpn-border)]">
+            <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
               {data.announce.image ? (
                 <div
                   className="h-40 w-full bg-cover bg-center"
                   style={{ backgroundImage: `url(${data.announce.image})` }}
                 />
               ) : (
-                <div className="h-32 w-full bg-gradient-to-r from-[var(--vpn-gradient-from)] to-[var(--vpn-gradient-to)]" />
+                <div className="h-32 w-full bg-gradient-to-r from-blue-500 to-cyan-500" />
               )}
               <div className="p-4">
                 <span className="inline-block rounded bg-red-500 px-2 py-0.5 text-xs text-white">公告</span>
-                <p className="mt-2 text-sm text-gray-300">{data.announce.content}</p>
-                <p className="mt-1 text-xs text-gray-500">{data.announce.date}</p>
+                <p className="mt-2 text-sm text-zinc-700">{data.announce.content}</p>
+                <p className="mt-1 text-xs text-zinc-500">{data.announce.date}</p>
               </div>
             </div>
           )}
 
           {/* 套餐信息卡片 */}
           {data?.plan && (
-            <div className="rounded-lg border border-[var(--vpn-border)] bg-[var(--vpn-card)] p-4">
+            <div className="rounded-lg border border-zinc-200 bg-white p-4">
               <h3 className="text-base font-semibold">{data.plan.name}</h3>
-              <p className="mt-1 text-xs text-gray-400">
+              <p className="mt-1 text-xs text-zinc-500">
                 创建时间：{data.plan.created_at}，{data.plan.note ?? ""}
               </p>
               {/* 使用情况 */}
               {data?.usage && (
                 <div className="mt-4">
-                  <div className="mb-1 flex items-center justify-between text-xs text-gray-400">
+                  <div className="mb-1 flex items-center justify-between text-xs text-zinc-500">
                     <span>使用情况</span>
                     <span>{data.usage.percent.toFixed(2)}%</span>
                   </div>
-                  <div className="h-2 w-full rounded bg-[var(--vpn-muted-bg)]">
+                  <div className="h-2 w-full rounded bg-zinc-200">
                     <div
-                      className="h-2 rounded bg-[var(--vpn-primary)]"
+                      className="h-2 rounded bg-blue-600"
                       style={{ width: `${Math.min(100, Math.max(0, data.usage.percent))}%` }}
                     />
                   </div>
-                  <p className="mt-2 text-xs text-gray-500">
+                  <p className="mt-2 text-xs text-zinc-500">
                     已用 {data.usage.used_gb.toFixed(4)}G / 总 {data.usage.total_gb.toFixed(3)}G
                   </p>
                 </div>
@@ -97,9 +97,9 @@ export default function DashboardPage() {
           {data?.quick && (
             <div className="space-y-2">
               {data.quick.map((q) => (
-                <details key={q.title} className="rounded-lg border border-[var(--vpn-border)] bg-[var(--vpn-card)] p-3">
-                  <summary className="cursor-pointer text-sm font-medium text-[var(--vpn-fg)]">{q.title}</summary>
-                  <p className="mt-2 text-xs text-[var(--vpn-muted)]">{q.description}</p>
+                <details key={q.title} className="rounded-lg border border-zinc-200 bg-white p-3">
+                  <summary className="cursor-pointer text-sm font-medium text-zinc-900">{q.title}</summary>
+                  <p className="mt-2 text-xs text-zinc-600">{q.description}</p>
                 </details>
               ))}
             </div>

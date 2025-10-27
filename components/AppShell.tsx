@@ -4,11 +4,10 @@ import HeaderNav from "@/components/HeaderNav";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[var(--vpn-bg)] text-[var(--vpn-fg)]">
-      <header className="sticky top-0 z-10 border-b border-[var(--vpn-border)] bg-[var(--vpn-header)] backdrop-blur">
+    <div className="min-h-screen bg-white text-zinc-900">
+      <header className="sticky top-0 z-10 border-b border-zinc-200 bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[var(--vpn-primary)] text-white">猫</span>
             <h1 className="text-lg font-semibold">逗猫 · 控制台</h1>
           </div>
           <HeaderNav />
@@ -16,7 +15,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <div className="mx-auto grid max-w-6xl grid-cols-[240px_1fr] gap-6 px-4 py-6">
-        <aside className="rounded-lg border border-[var(--vpn-border)] bg-[var(--vpn-card)] p-3 text-sm">
+        <aside className="rounded-lg border border-zinc-200 bg-white p-3 text-sm">
           <nav className="space-y-2">
             {[
               { label: "仪表盘", href: "/dashboard" },
@@ -30,7 +29,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               ].map((item) => (
               <a
                 key={item.label}
-                className="block rounded-md px-3 py-2 hover:bg-[var(--vpn-muted-bg)]"
+                className="block rounded-md px-3 py-2 hover:bg-zinc-100"
                 href={item.href}
               >
                 {item.label}
@@ -42,7 +41,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <main className="space-y-6">{children}</main>
       </div>
 
-      <footer className="mx-auto max-w-6xl px-4 py-6 text-xs text-[var(--vpn-muted)]">
+      <footer className="mx-auto max-w-6xl px-4 py-6 text-xs text-zinc-500">
         <small>© {new Date().getFullYear()} yanghao0075</small>
       </footer>
     </div>
