@@ -44,8 +44,8 @@ export class HttpError extends Error {
   }
 }
 
-// API配置
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '' // 使用环境变量或空字符串
+// API配置：默认使用相对路径 '/api'，通过 Next.js 重写代理到后端
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE ?? '/api'
 const DEFAULT_TIMEOUT = 10000 // 10秒
 
 // 请求配置
@@ -82,7 +82,8 @@ async function request<T>(
       ...options,
       headers: mergedHeaders, // 使用合并后的headers
       signal: controller.signal,
-      credentials: 'include' // 包含cookies
+      // 纯 JWT 模式，不依赖 cookies
+      credentials: 'omit'
     })
     
     clearTimeout(timeoutId)
