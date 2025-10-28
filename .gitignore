@@ -11,6 +11,11 @@ pnpm-debug.log*
 out/
 coverage/
 
+# === Build caches ===
+.swc/
+.turbo/
+.cache/
+
 # === Vercel ===
 .vercel/
 
@@ -23,6 +28,9 @@ coverage/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# === TypeScript ===
+*.tsbuildinfo
 
 # === Editor/OS ===
 .DS_Store
