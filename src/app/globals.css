@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --header-h: 73px;
 }
 
 @theme inline {
@@ -16,6 +17,8 @@
   :root {
     --background: #0a0a0a;
     --foreground: #888888;
+    /* 保持头部高度变量一致 */
+    --header-h: 73px;
   }
 }
 

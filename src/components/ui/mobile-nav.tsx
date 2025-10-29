@@ -29,7 +29,7 @@ export function MobileNav({ items }: MobileNavProps) {
       </Button>
 
       {open && (
-        <div className="fixed left-0 right-0 top-[73px] bottom-0 z-50 lg:hidden">
+        <div className="fixed left-0 right-0 top-[var(--header-h)] bottom-0 z-50 lg:hidden">
           {/* 背景遮罩 */}
           <div
             className="absolute inset-0 bg-black/40"

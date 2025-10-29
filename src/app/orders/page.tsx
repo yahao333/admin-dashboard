@@ -24,6 +24,7 @@ import {
   Play
 } from 'lucide-react'
 import { SidebarNav } from '@/components/ui/sidebar-nav'
+import { AppHeader } from '@/components/ui/app-header'
 
 // 订单状态映射
 const statusMap: Record<string, { label: string; color: string }> = {
@@ -146,23 +147,13 @@ export default function Orders() {
 
   return (
     <div className="min-h-screen w-full bg-gray-50">
-      <header className="w-full bg-white shadow fixed top-0 left-0 right-0 z-40">
-        <div className="w-full max-w-[1920px] mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">SaaS管理平台</h1>
-          <div className="flex items-center gap-4">
-            <span className="text-gray-600">{user?.email}</span>
-            <Button variant="outline" onClick={handleLogout}>
-              退出登录
-            </Button>
-          </div>
-        </div>
-      </header>
-      <div className="flex pt-[73px]">
-        <aside className="hidden lg:block fixed z-30 inset-y-0 left-0 top-[73px] w-64 bg-white border-r px-4 py-6">
+      <AppHeader items={sidebarNavItems} />
+      <div className="flex pt-[var(--header-h)]">
+        <aside className="hidden lg:block fixed z-30 inset-y-0 left-0 top-[var(--header-h)] w-64 bg-white border-r px-4 py-6">
           <SidebarNav items={sidebarNavItems} />
         </aside>
         <main className="flex-1 lg:pl-64">
-          <div className="w-full max-w-[1920px] mx-auto px-4 py-6 sm:px-6 lg:px-8">
+          <div className="w-full max-w-[1920px] mx-auto px-4 pt-2 pb-6 sm:px-6 lg:px-8">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold tracking-tight">我的订单</h2>
