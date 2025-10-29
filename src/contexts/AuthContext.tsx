@@ -41,6 +41,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     useEffect(() => {
       const token = localStorage.getItem('token')
       if (token) {
+        // 乐观设为已登录：避免在开发环境或网络抖动下刷新时被误判未登录
+        // 仅当后端明确返回 401/403 时再置为未登录
+        setIsAuthenticated(true)
         checkAuth(token)
       } else {
         setLoading(false)
