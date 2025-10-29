@@ -17,6 +17,7 @@ import {
   Play
 } from 'lucide-react'
 import { SidebarNav } from '@/components/ui/sidebar-nav'
+import { MobileNav } from '@/components/ui/mobile-nav'
 
 export default function Dashboard() {
   const router = useRouter()
@@ -137,7 +138,10 @@ export default function Dashboard() {
     <div className="min-h-screen w-full bg-gray-50">
       <header className="w-full bg-white shadow fixed top-0 left-0 right-0 z-40">
         <div className="w-full max-w-[1920px] mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">SaaS管理平台</h1>
+          <div className="flex items-center gap-2">
+            <MobileNav items={sidebarNavItems} />
+            <h1 className="text-2xl font-bold text-gray-900">SaaS管理平台</h1>
+          </div>
           <div className="flex items-center gap-4">
             <span className="text-gray-600">{user?.email}</span>
             <Button variant="outline" onClick={handleLogout}>
